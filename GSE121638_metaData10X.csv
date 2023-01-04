@@ -1,0 +1,17 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,cell type,smokers,notes
+GSE121638,GSM3440844,renal cell carcinoma,,,69,Tumor,700,,,tumor stage: pT3a
+GSE121638,GSM3440845,renal cell carcinoma,,,74,Tumor,715,,,tumor stage: pT1b
+GSE121638,GSM3440846,renal cell carcinoma,,,67,Tumor,744,,,tumor stage: pT1b
+GSE121638,GSM3440847,renal cell carcinoma,,,69,PBMC,700,,,tumor stage: pT3a
+GSE121638,GSM3440848,renal cell carcinoma,,,74,PBMC,715,,,tumor stage: pT1b
+GSE121638,GSM3440849,renal cell carcinoma,,,67,PBMC,744,,,tumor stage: pT1b
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
