@@ -1,7 +1,7 @@
 
 import sqlite3
 import pandas as pd
-
+import handle_contig
 
 def create_db_test():
     # Connect to the database
@@ -34,8 +34,10 @@ def create_db_test():
     # Create the experiment_Data table
     cursor.execute('''CREATE TABLE experiment_Data (series_number TEXT NOT NULL,
       sample_number TEXT NOT NULL,
+      barcode TEXT,
       is_cell TEXT,
       contig_id TEXT,
+      high_confidence TEXT,
       length INTEGER CHECK(length > 0),
       chain TEXT,
       v_gene TEXT,
@@ -59,9 +61,9 @@ def create_db_test():
       ON UPDATE CASCADE );
     ''')
 
-    # Create an index on the foreign key columns
-    cursor.execute('''CREATE INDEX series_contig_fk1 ON contig(series_number)''')
-    cursor.execute('''CREATE INDEX sample_contig_fk2 ON contig(sample_number)''')
+    # # Create an index on the foreign key columns
+    # cursor.execute('''CREATE INDEX series_contig_fk1 ON experiment_Data(series_number)''')
+    # cursor.execute('''CREATE INDEX sample_contig_fk2 ON experiment_Data(sample_number)''')
 
     # TODO: should be in a loop that reads csv after csv and adds to growing 'metadata' database
     # Read the CSV file into a DataFrame
