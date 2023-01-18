@@ -1,0 +1,5 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,cell type,smokers,notes
+GSE161192,GSM4891327,LBD,,,,PBMC,Patient1U,,,unstimulated 
+GSE161192,GSM4891328,LBD,,,,PBMC,Patient1S,,,stimulated
+GSE161192,GSM4891329,LBD,,,,PBMC,Patient2U,,,unstimulated 
+GSE161192,GSM4891330,LBD,,,,PBMC,Patient2S,,,stimulated

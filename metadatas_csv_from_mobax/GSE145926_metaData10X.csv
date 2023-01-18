@@ -1,0 +1,17 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,cell type,smokers,notes
+GSE145926,GSM4385990,COVID-19,,,,lung,C141,,,patient group: mild
+GSE145926,GSM4385991,COVID-19,,,,lung,C142,,,patient group: mild
+GSE145926,GSM4385992,COVID-19,,,,lung,C143,,,patient group: severe
+GSE145926,GSM4385993,COVID-19,,,,lung,C144,,,patient group: mild
+GSE145926,GSM4385994,COVID-19,,,,lung,C145,,,patient group: severe
+GSE145926,GSM4385995,COVID-19,,,,lung,C146,,,patient group: severe
+GSE145926,GSM4475054,COVID-19,,,,lung,C148,,,patient group: severe
+GSE145926,GSM4475055,COVID-19,,,,lung,C149,,,patient group: severe
+GSE145926,GSM4475056,COVID-19,,,,lung,C152,,,patient group: severe
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
