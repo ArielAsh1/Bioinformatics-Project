@@ -60,9 +60,6 @@ def create_db_test():
       ON UPDATE CASCADE );
     ''')
 
-    # Create an index on the foreign key columns
-    # cursor.execute('''CREATE INDEX series_contig_fk1 ON contig(series_number)''')
-    # cursor.execute('''CREATE INDEX sample_contig_fk2 ON contig(sample_number)''')
 
     # TODO: downloaded mataDAta files from Mobax are in .xlsx format and not in CSV!!! should convert each
     # until now, all meta files up to GSE162500 are uploaded here with correct format. need to complete the rest
