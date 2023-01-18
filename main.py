@@ -59,6 +59,10 @@ def create_db_test():
       ON UPDATE CASCADE );
     ''')
 
+    # Create an index on the foreign key columns
+    cursor.execute('''CREATE INDEX series_contig_fk1 ON contig(series_number)''')
+    cursor.execute('''CREATE INDEX sample_contig_fk2 ON contig(sample_number)''')
+
     # TODO: should be in a loop that reads csv after csv and adds to growing 'metadata' database
     # Read the CSV file into a DataFrame
     metadata_df = pd.read_csv("GSE121638_metaData10X.csv")
