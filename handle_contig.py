@@ -6,7 +6,7 @@ def create_contig_df():
     contig_table = pd.read_csv('GSM3148584_BC11_TUMOR2_filtered_contig_annotations.csv')
     name = csv_file.name
     sample_number = name[:name.index("_")]
-    series_number = "GSM3148584"
+    series_number = "GSE114724"
     # inserts sample and series value to start of df
     contig_table.insert(0, "sample_number", sample_number, True)
     contig_table.insert(0, "series_number", series_number, True)
