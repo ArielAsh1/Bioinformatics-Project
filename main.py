@@ -3,13 +3,14 @@ import sqlite3
 import pandas as pd
 import handle_contig
 
+# Connect to the database
+conn = sqlite3.connect('new_database.db')
+
+# Create a cursor
+cursor = conn.cursor()
+
+
 def create_db_test():
-    # Connect to the database
-    conn = sqlite3.connect('new_database.db')
-
-    # Create a cursor
-    cursor = conn.cursor()
-
     # deletes previous existing tables
     # TODO: at the end, reconsider this drop, because we dont want to reload the whole db everytime...
     cursor.execute('''DROP TABLE metadata''')
@@ -31,7 +32,8 @@ def create_db_test():
     ''')
 
     # Create the experiment_Data table
-    cursor.execute('''CREATE TABLE experiment_Data (series_number TEXT NOT NULL,
+    cursor.execute('''CREATE TABLE experiment_Data (record_id INTEGER NOT NULL,
+      series_number TEXT NOT NULL,
       sample_number TEXT NOT NULL,
       barcode TEXT,
       is_cell TEXT,
@@ -51,7 +53,7 @@ def create_db_test():
       umis INTEGER CHECK (umis > 0),
       raw_clonotype_id TEXT,
       raw_consensus_id TEXT,
-      primary key (series_number, sample_number)
+      primary key (record_id, series_number, sample_number)
       FOREIGN KEY(series_number) REFERENCES metadata(series_number) 
       ON DELETE CASCADE
       ON UPDATE CASCADE,
@@ -60,7 +62,7 @@ def create_db_test():
       ON UPDATE CASCADE );
     ''')
 
-
+def append_meta():
     # Loop through all the CSV files in the directory and appends their content to growing metadata db
     # for each CSV file, only the content (without column names) is added.
     # the column names appear only once, at the top of metadata database
@@ -88,17 +90,26 @@ def create_db_test():
     # cursor.execute('''CREATE INDEX series_contig_fk1 ON experiment_Data(series_number)''')
     # cursor.execute('''CREATE INDEX sample_contig_fk2 ON experiment_Data(sample_number)''')
 
-
     ## a test to check that it added the data to 'metadata' db
-    metadata_df_from_db = pd.read_sql_query("SELECT * from metadata", conn)
-    print(metadata_df_from_db)
+    # metadata_df_from_db = pd.read_sql_query("SELECT * from metadata", conn)
+    # print(metadata_df_from_db)
 
-    # Commit the transaction
-    conn.commit()
 
-    # Close the connection
-    conn.close()
+def append_contig(contig_df):
+    contig_df.to_sql("experiment_Data", conn, if_exists="append", index=False)
 
 
 if __name__ == '__main__':
     create_db_test()
+    contig_df = handle_contig.create_contig_df()
+    append_contig(contig_df)
+    append_meta()
+    # contig_df_from_db = pd.read_sql_query("SELECT * from experiment_data", conn)
+    # print(contig_df_from_db)
+    test_df = pd.read_sql_query("SELECT metadata.sample_number FROM metadata, experiment_data "
+                                "WHERE metadata.series_number = experiment_data.series_number AND metadata.sample_number = experiment_data.sample_number", conn)
+    # Commit the transaction
+    print(test_df)
+    conn.commit()
+    # Close the connection
+    conn.close()
