@@ -61,10 +61,6 @@ def create_db_test():
     ''')
 
 
-    # TODO: downloaded mataDAta files from Mobax are in .xlsx format and not in CSV!!! should convert each
-    # until now, all meta files up to GSE162500 are uploaded here with correct format. need to complete the rest
-
-
     # Loop through all the CSV files in the directory and appends their content to growing metadata db
     # for each CSV file, only the content (without column names) is added.
     # the column names appear only once, at the top of metadata database
