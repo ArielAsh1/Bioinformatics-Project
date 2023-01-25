@@ -1,0 +1,19 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,smokers,notes
+GSE166489,GSM5073073,MIS-C,,,Pediatric,PBMC,P1.1,,disease subtype: Severe
+GSE166489,GSM5073074,MIS-C,,,Pediatric,PBMC,P2.1,,disease subtype: Severe
+GSE166489,GSM5073075,MIS-C,,,Pediatric,PBMC,P3.1,,disease subtype: Severe
+GSE166489,GSM5073076,MIS-C,,,Pediatric,PBMC,P4.1,,disease subtype: Moderate
+GSE166489,GSM5073077,MIS-C,,,Pediatric,PBMC,P5.1,,disease subtype: Moderate
+GSE166489,GSM5073078,MIS-C,,,Pediatric,PBMC,P6.1,,disease subtype: Severe
+GSE166489,GSM5073079,MIS-C,,,Pediatric,PBMC,P7.1,,disease subtype: Severe
+GSE166489,GSM5073080,MIS-C,,,Pediatric,PBMC,P3.2,,"disease subtype: Severe,Recovered"
+GSE166489,GSM5073081,MIS-C,,,Pediatric,PBMC,P4.2,,"disease subtype: Moderate,Recovered"
+GSE166489,GSM5073082,Healthy,,,Pediatric,PBMC,P.HD1,,
+GSE166489,GSM5073083,Healthy,,,Pediatric,PBMC,P.HD2,,
+GSE166489,GSM5073084,Healthy,,,Pediatric,PBMC,P.HD3,,
+GSE166489,GSM5073085,Healthy,,,Pediatric,PBMC,P.HD4,,
+GSE166489,GSM5073086,Healthy,,,Pediatric,PBMC,P.HD5,,
+GSE166489,GSM5073087,Healthy,,,Pediatric,PBMC,P.HD6,,
+GSE166489,GSM5073088,Healthy,,,Adult,PBMC,A.HD1,,
+GSE166489,GSM5073089,Healthy,,,Adult,PBMC,A.HD2,,
+GSE166489,GSM5073090,Healthy,,,Adult,PBMC,A.HD3,,

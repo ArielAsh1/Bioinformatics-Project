@@ -1,0 +1,17 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,cell type,smokers,notes
+GSE168732,GSM5160417,KD,IVIG,,,PBMC,Patient1,,,before IVIG therapy
+GSE168732,GSM5160419,KD,IVIG,,,PBMC,Patient1,,,after IVIG therapy
+GSE168732,GSM5160420,KD,IVIG,,,PBMC,Patient2,,,before IVIG therapy
+GSE168732,GSM5160421,KD,IVIG,,,PBMC,Patient2,,,after IVIG therapy
+GSE168732,GSM5160422,KD,IVIG,,,PBMC,Patient3,,,before IVIG therapy
+GSE168732,GSM5160423,KD,IVIG,,,PBMC,Patient3,,,after IVIG therapy
+GSE168732,GSM5160424,KD,IVIG,,,PBMC,Patient4,,,before IVIG therapy
+GSE168732,GSM5160425,KD,IVIG,,,PBMC,Patient4,,,after IVIG therapy
+GSE168732,GSM5160427,KD,IVIG,,,PBMC,Patient5,,,before IVIG therapy
+GSE168732,GSM5160428,KD,IVIG,,,PBMC,Patient5,,,after IVIG therapy
+GSE168732,GSM5160430,KD,IVIG,,,PBMC,Patient6,,,before IVIG therapy
+GSE168732,GSM5160431,KD,IVIG,,,PBMC,Patient6,,,after IVIG therapy
+GSE168732,GSM5160432,Healthy,,,,PBMC,Healty1,,,
+GSE168732,GSM5160434,Healthy,,,,PBMC,Healty2,,,
+GSE168732,GSM5160435,Healthy,,,,PBMC,Healty3,,,
+,,,,,,,,,,

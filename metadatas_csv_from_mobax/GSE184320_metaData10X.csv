@@ -1,0 +1,7 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,notes
+GSE184320,GSM5584064,Healthy,,,,Blood and skin,H1,
+GSE184320,GSM5584065,Healthy,,,,Blood and skin,H2,
+GSE184320,GSM5584066,Healthy,,,,Blood and skin,H3,
+GSE184320,GSM5584067,HIV,,,,Blood and skin,HIV1,
+GSE184320,GSM5584068,HIV,,,,Blood and skin,HIV2,
+GSE184320,GSM5584069,HIV,,,,Blood and skin,HIV3,

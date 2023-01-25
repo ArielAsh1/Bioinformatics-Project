@@ -1,0 +1,7 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,cell type,notes
+GSE172403,GSM5255040,,,,,,21LT2,,WT PIK3CA
+GSE172403,GSM5255042,,,,,,21LT2,,PIK3CA (H1047L)
+GSE172403,GSM5255044,,,,,,0606T1,,WT PIK3CA
+GSE172403,GSM5255046,,,,,,0606T1,,PIK3CA (H1047L)
+GSE172403,GSM5872764,breast cancer,,,,,MR4050,,WT PIK3CA
+GSE172403,GSM5872766,breast cancer,,,,,MR4050,,PIK3CA (H1047L)
