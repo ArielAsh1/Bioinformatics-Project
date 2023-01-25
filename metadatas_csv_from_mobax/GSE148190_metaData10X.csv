@@ -1,0 +1,3 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,cell type,smokers,notes
+GSE148190,GSM4455934,melanoma,,,,lymph node,K409,,,
+GSE148190,GSM4455936,melanoma,,,,tumor,K409,,,

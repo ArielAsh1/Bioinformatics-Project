@@ -1,0 +1,17 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,cell type,notes
+GSE176201,GSM5359856,Healthy,,,,PBMC,donor2,CD3+,post-acute COVID-19
+GSE176201,GSM5359862,Healthy,,,,PBMC,donor3,CD3+,post-acute COVID-19
+GSE176201,GSM5359863,Healthy,,,,PBMC,donor4,CD3+,post-acute COVID-19
+GSE176201,GSM5359864,Healthy,,,,PBMC,donor5,CD3+,post-acute COVID-19
+GSE176201,GSM5359865,Healthy,,,,PBMC,donor6,CD3+,post-acute COVID-19
+GSE176201,GSM5359866,Healthy,,,,PBMC,donor7,CD3+,post-acute COVID-19
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,

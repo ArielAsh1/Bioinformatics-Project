@@ -1,0 +1,13 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,cell type,smokers,notes
+GSE162500,GSM4952970,Lung Cancer,,F,,Tumor,P47,,,NSCLC
+GSE162500,GSM4952971,Lung Cancer,,M,,Tumor,P55,,,NSCLC
+GSE162500,GSM4952972,Lung Cancer,,M,,Tumor,P57,,,NSCLC
+GSE162500,GSM4952973,Lung Cancer,,M,,Blood,P57,,,NSCLC
+GSE162500,GSM4952974,Lung Cancer,,F,,Tumor,P58,,,NSCLC
+GSE162500,GSM4952975,Lung Cancer,,F,,Blood,P58,,,NSCLC
+GSE162500,GSM4952976,Lung Cancer,,M,,Tumor,P60,,,NSCLC
+GSE162500,GSM4952977,Lung Cancer,,M,,juxta,P60,,,NSCLC
+GSE162500,GSM4952978,Lung Cancer,,M,,Blood,P60,,,NSCLC
+GSE162500,GSM4952979,Lung Cancer,,M,,Tumor,P61,,,NSCLC
+GSE162500,GSM4952980,Lung Cancer,,M,,juxta,P61,,,NSCLC
+GSE162500,GSM4952981,Lung Cancer,,M,,Blood,P61,,,NSCLC

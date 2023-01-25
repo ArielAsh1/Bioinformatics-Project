@@ -1,4 +1,4 @@
-
+import os
 import sqlite3
 import pandas as pd
 import handle_contig
@@ -11,9 +11,8 @@ cursor = conn.cursor()
 
 
 def create_db_test():
-    # # Import data from a CSV file
-    # with open('import.sql', 'r') as f:
-    #     cursor.executescript(f.read())
+    # deletes previous existing tables
+    # TODO: at the end, reconsider this drop, because we dont want to reload the whole db everytime...
     cursor.execute('''DROP TABLE metadata''')
     cursor.execute('''DROP TABLE experiment_Data''')
 
@@ -63,28 +62,33 @@ def create_db_test():
       ON UPDATE CASCADE );
     ''')
 
+def append_meta():
+    # Loop through all the CSV files in the directory and appends their content to growing metadata db
+    # for each CSV file, only the content (without column names) is added.
+    # the column names appear only once, at the top of metadata database
+    for file_name in os.listdir('metadatas_csv_from_mobax'):
+        if file_name.endswith('.csv'):
+
+            # Read the CSV file into a DataFrame
+            metadata_df = pd.read_csv(os.path.join('metadatas_csv_from_mobax', file_name))
+
+            # rename all column names, so whitespace " " will be replaced with underscore "_"
+            # e.g: change 'series number' to 'series_number' so it matches with the column in our metadata db
+            metadata_df.rename(columns={'series number': 'series_number'}, inplace=True)
+            metadata_df.rename(columns={'sample number': 'sample_number'}, inplace=True)
+            metadata_df.rename(columns={'clinical condition': 'clinical_condition'}, inplace=True)
+            metadata_df.rename(columns={'patient id': 'patient_id'}, inplace=True)
+            metadata_df.rename(columns={'cell type': 'cell_type'}, inplace=True)
+
+            # if a line is empty (all NULL) so don't append it to metadata db
+            metadata_df.dropna(how='all', axis=0, inplace=True)
+
+            # Insert the data into the metadata table
+            metadata_df.to_sql("metadata", conn, if_exists="append", index=False)
+
     # # Create an index on the foreign key columns
     # cursor.execute('''CREATE INDEX series_contig_fk1 ON experiment_Data(series_number)''')
     # cursor.execute('''CREATE INDEX sample_contig_fk2 ON experiment_Data(sample_number)''')
-
-
-def append_meta():
-    # TODO: should be in a loop that reads csv after csv and adds to growing 'metadata' database
-    # Read the CSV file into a DataFrame
-    metadata_df = pd.read_csv("GSE114724_metaData10X.csv")
-
-    # TODO: should generalize it so every column name with space will have underscore instead
-    # renames all columns names so whitespace " " will be replaced with underscore "_"
-    # for example: from 'series number' to 'series_number' to match with the column in 'metadata' db
-    metadata_df.rename(columns={'series number': 'series_number'}, inplace=True)
-    metadata_df.rename(columns={'sample number': 'sample_number'}, inplace=True)
-    metadata_df.rename(columns={'clinical condition': 'clinical_condition'}, inplace=True)
-    metadata_df.rename(columns={'patient id': 'patient_id'}, inplace=True)
-    metadata_df.rename(columns={'cell type': 'cell_type'}, inplace=True)
-
-    # TODO: handle the case where a line in metadata CSV is empty line
-    # Insert the data into the metadata table
-    metadata_df.to_sql("metadata", conn, if_exists="append", index=False)
 
     ## a test to check that it added the data to 'metadata' db
     # metadata_df_from_db = pd.read_sql_query("SELECT * from metadata", conn)

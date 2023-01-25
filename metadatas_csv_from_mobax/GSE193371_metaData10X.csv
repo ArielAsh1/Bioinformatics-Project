@@ -1,0 +1,9 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,cell type,notes
+GSE193371,GSM5798836,OvarianCancer,Surgery,,,Tumor,T021518,TRM,
+GSE193371,GSM5798837,OvarianCancer,Surgery,,,Tumor,T022719,TRM,
+GSE193371,GSM5798839,OvarianCancer,Surgery,,,Tumor,T082219,TRM,
+GSE193371,GSM5798840,OvarianCancer,Surgery,,,Tumor,T021518,ReCir,
+GSE193371,GSM5798841,OvarianCancer,Surgery,,,Tumor,T022719,ReCir,
+GSE193371,GSM5798842,OvarianCancer,Surgery,,,Tumor,T082219,ReCir,
+GSE193371,GSM5798843,OvarianCancer,Surgery,,,Tumor,T042719,CD8,
+GSE193371,GSM5798844,OvarianCancer,Surgery,,,Tumor,T042719,CD8,

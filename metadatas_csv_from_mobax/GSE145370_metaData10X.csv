@@ -1,0 +1,15 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,cell type,smokers,notes
+GSE145370,GSM4317423,ESCC,,M,60,Tumor,S133,,,pathological stage: IIIB
+GSE145370,GSM4317424,ESCC,,F,53,Tumor,S134,,,pathological stage: IIIA
+GSE145370,GSM4317425,ESCC,,M,71,Tumor,S135,,,pathological stage: IIA
+GSE145370,GSM4317426,ESCC,,M,81,Tumor,S149,,,pathological stage: IIA
+GSE145370,GSM4317427,ESCC,,M,73,Tumor,S150,,,pathological stage: IIIB
+GSE145370,GSM4317428,ESCC,,M,55,Tumor,S158,,,pathological stage: IIB
+GSE145370,GSM4317429,ESCC,,M,54,Tumor,S159,,,pathological stage: IIIB
+GSE145370,GSM4317430,ESCC,,M,60,adjacent normal tissue,S133,,,pathological stage: IIIB
+GSE145370,GSM4317431,ESCC,,F,53,adjacent normal tissue,S134,,,pathological stage: IIIA
+GSE145370,GSM4317432,ESCC,,M,71,adjacent normal tissue,S135,,,pathological stage: IIA
+GSE145370,GSM4317433,ESCC,,M,81,adjacent normal tissue,S149,,,pathological stage: IIA
+GSE145370,GSM4317434,ESCC,,M,73,adjacent normal tissue,S150,,,pathological stage: IIIB
+GSE145370,GSM4317435,ESCC,,M,55,adjacent normal tissue,S158,,,pathological stage: IIB
+GSE145370,GSM4317436,ESCC,,M,54,adjacent normal tissue,S159,,,pathological stage: IIIB

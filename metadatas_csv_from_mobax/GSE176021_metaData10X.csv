@@ -1,0 +1,111 @@
+series number,sample number,clinical condition,treatment,sex,age,tissue,patient id,cell type,smokers,notes
+GSE176021,GSM5352886,Adenocarcinoma,,F,70,Tumor,MD01-024,lymphocytes,FALSE,response status: Non-MPR
+GSE176021,GSM5352887,Adenocarcinoma,,F,78,Normal,MD01-010,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352888,Adenocarcinoma,,F,78,Tumor,MD01-010,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352889,Adenocarcinoma,,M,67,Normal,MD01-004,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352890,Adenocarcinoma,,M,67,Lymph Node,MD01-004,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352891,Adenocarcinoma,,M,67,Lymph Node,MD01-004,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352892,Adenocarcinoma,,M,67,Lymph Node,MD01-004,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352893,Adenocarcinoma,,M,55,Metastatic Tumor,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352894,Adenocarcinoma,,M,55,normal,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352895,Adenocarcinoma,,M,55,mettumor,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352896,Adenocarcinoma,,M,55,mettumor,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352897,Adenocarcinoma,,M,55,mettumor,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352898,Adenocarcinoma,,M,55,mettumor,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352899,Adenocarcinoma,,M,55,tumor,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352900,Adenocarcinoma,,M,55,tumor,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352901,Adenocarcinoma,,M,55,tumor,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352902,Adenocarcinoma,,M,55,tumor,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352903,Adenocarcinoma,,M,55,Normal,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352904,Adenocarcinoma,,M,55,Normal,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352905,Adenocarcinoma,,M,55,Normal,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352906,Adenocarcinoma,,M,55,Normal,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352907,Adenocarcinoma,,M,55,Lymph Node,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352908,Adenocarcinoma,,M,55,Lymph Node,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352909,Adenocarcinoma,,M,55,Lymph Node,MD043-011,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352910,Adenocarcinoma,,M,70,tumor,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352911,Adenocarcinoma,,M,70,Normal,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352912,Adenocarcinoma,,M,70,tumor,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352913,Adenocarcinoma,,M,70,tumor,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352914,Adenocarcinoma,,M,70,tumor,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352915,Adenocarcinoma,,M,70,tumor,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352916,Adenocarcinoma,,M,70,tumor,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352917,Adenocarcinoma,,M,70,tumor,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352918,Adenocarcinoma,,M,70,tumor,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352919,Adenocarcinoma,,M,70,tumor,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352920,Adenocarcinoma,,M,70,tumor,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352921,Adenocarcinoma,,M,70,Normal,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352922,Adenocarcinoma,,M,70,tumor,MD01-019,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352923,Squamous Cell Carcinoma,,F,68,Normal,NY016-007,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352924,Squamous Cell Carcinoma,,F,68,tumor,NY016-007,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352925,Squamous Cell Carcinoma,,F,68,tumor,NY016-007,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352926,Squamous Cell Carcinoma,,F,68,tumor,NY016-007,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352927,Adenocarcinoma,,F,58,tumor,NY016-014,lymphocytes,FALSE,response status: Non-MPR
+GSE176021,GSM5352928,Adenocarcinoma,,F,58,tumor,NY016-014,lymphocytes,FALSE,response status: Non-MPR
+GSE176021,GSM5352929,Adenocarcinoma,,F,58,tumor,NY016-014,lymphocytes,FALSE,response status: Non-MPR
+GSE176021,GSM5352930,Adenocarcinoma,,F,58,Normal,NY016-015,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352931,Adenocarcinoma,,F,58,tumor,NY016-015,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352932,Adenocarcinoma,,F,58,tumor,NY016-015,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352933,Adenocarcinoma,,F,58,tumor,NY016-015,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352934,Adenocarcinoma,,F,58,tumor,NY016-015,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352935,Adenocarcinoma,,F,79,Normal,NY016-016,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352936,Adenocarcinoma,,M,74,tumor,NY016-021,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352937,Adenocarcinoma,,F,66,Normal,NY016-022,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352938,Adenocarcinoma,,F,66,tumor,NY016-022,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352939,Adenocarcinoma,,F,66,tumor,NY016-022,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352940,Adenocarcinoma,,F,66,tumor,NY016-022,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352941,Adenocarcinoma,,F,66,tumor,NY016-022,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352942,Adenocarcinoma,,F,74,Normal,NY016-025,lymphocytes,FALSE,response status: MPR
+GSE176021,GSM5352943,Adenocarcinoma,,F,74,tumor,NY016-025,lymphocytes,FALSE,response status: MPR
+GSE176021,GSM5352944,Adenocarcinoma,,F,74,tumor,NY016-025,lymphocytes,FALSE,response status: MPR
+GSE176021,GSM5352945,Adenocarcinoma,,F,74,tumor,NY016-025,lymphocytes,FALSE,response status: MPR
+GSE176021,GSM5352946,Adenocarcinoma,,F,74,tumor,NY016-025,lymphocytes,FALSE,response status: MPR
+GSE176021,GSM5352947,Squamous Cell Carcinoma,,F,72,tumor,MD043-008,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352948,Squamous Cell Carcinoma,,F,72,Normal,MD043-008,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352949,Adenocarcinoma,,M,62,tumor,MD043-003,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352950,Adenocarcinoma,,M,62,Normal,MD043-003,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352951,Adenocarcinoma,,M,62,tumor,MD043-003,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352952,Adenocarcinoma,,M,62,tumor,MD043-003,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352953,Adenocarcinoma,,M,62,tumor,MD043-003,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352954,Adenocarcinoma,,M,62,tumor,MD043-003,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352955,Squamous Cell Carcinoma,,M,61,Normal,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352956,Squamous Cell Carcinoma,,M,61,Normal,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352957,Squamous Cell Carcinoma,,M,61,Normal,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352958,Squamous Cell Carcinoma,,M,61,Normal,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352959,Squamous Cell Carcinoma,,M,61,Normal,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352960,Squamous Cell Carcinoma,,M,61,tumor,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352961,Squamous Cell Carcinoma,,M,61,tumor,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352962,Squamous Cell Carcinoma,,M,61,tumor,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352963,Squamous Cell Carcinoma,,M,61,tumor,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352964,Squamous Cell Carcinoma,,M,61,tumor,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352965,Squamous Cell Carcinoma,,M,61,tumor,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352966,Squamous Cell Carcinoma,,M,61,tumor,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352967,Squamous Cell Carcinoma,,M,61,tumor,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352968,Squamous Cell Carcinoma,,M,61,Lymph Node,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352969,Squamous Cell Carcinoma,,M,61,Lymph Node,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352970,Squamous Cell Carcinoma,,M,61,Lymph Node,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352971,Squamous Cell Carcinoma,,M,61,Lymph Node,MD01-005,lymphocytes,TRUE,response status: MPR
+GSE176021,GSM5352972,Squamous Cell Carcinoma,,M,69,Normal,MD043-006,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352973,Squamous Cell Carcinoma,,M,69,tumor,MD043-006,lymphocytes,TRUE,response status: Non-MPR
+GSE176021,GSM5352974,Adenocarcinoma,,M,67,tumor,MD01-004,lymphocytes,TRUE,"response status: Non-MPR,Flu0.1"
+GSE176021,GSM5352975,Adenocarcinoma,,M,67,tumor,MD01-004,lymphocytes,TRUE,"response status: Non-MPR,Flu10"
+GSE176021,GSM5352976,Adenocarcinoma,,M,67,tumor,MD01-004,lymphocytes,TRUE,"response status: Non-MPR,Flu1"
+GSE176021,GSM5352977,Adenocarcinoma,,M,67,tumor,MD01-004,lymphocytes,TRUE,"response status: Non-MPR,Flu0"
+GSE176021,GSM5352978,Adenocarcinoma,,M,67,tumor,MD01-004,lymphocytes,TRUE,"response status: Non-MPR,MANA0.1"
+GSE176021,GSM5352979,Adenocarcinoma,,M,67,tumor,MD01-004,lymphocytes,TRUE,"response status: Non-MPR,MANA10"
+GSE176021,GSM5352980,Adenocarcinoma,,M,67,tumor,MD01-004,lymphocytes,TRUE,"response status: Non-MPR,MANA1"
+GSE176021,GSM5352981,Adenocarcinoma,,M,67,tumor,MD01-004,lymphocytes,TRUE,"response status: Non-MPR,MANA0"
+GSE176021,GSM5352982,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,W2"
+GSE176021,GSM5352983,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,W4"
+GSE176021,GSM5352984,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,M3"
+GSE176021,GSM5352985,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,M3"
+GSE176021,GSM5352986,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,M3"
+GSE176021,GSM5352987,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,M3"
+GSE176021,GSM5352988,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,W2"
+GSE176021,GSM5352989,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,W2"
+GSE176021,GSM5352990,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,W2"
+GSE176021,GSM5352991,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,W4"
+GSE176021,GSM5352992,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,W4"
+GSE176021,GSM5352993,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,W4"
+GSE176021,GSM5352994,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,W4"
+GSE176021,GSM5352995,Squamous Cell Carcinoma,,M,61,pbmc,MD01-005,lymphocytes,TRUE,"response status: MPR,W4"
