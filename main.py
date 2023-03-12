@@ -82,8 +82,8 @@ if __name__ == '__main__':
 
     # contig_df_from_db = pd.read_sql_query("SELECT * from experiment_data", conn)
     # print(contig_df_from_db)
-    test_df = pd.read_sql_query("SELECT metadata.sample_number FROM metadata, experiment_data "
-                                "WHERE metadata.series_number = experiment_data.series_number AND metadata.sample_number = experiment_data.sample_number",
+    test_df = pd.read_sql_query("SELECT age FROM metadata WHERE sample_number "
+                                "IN (SELECT DISTINCT sample_number FROM experiment_data)",
                                 conn)
     # Commit the transaction
     # print(test_df)
