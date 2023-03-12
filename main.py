@@ -10,8 +10,9 @@ conn = sqlite3.connect('new_database.db')
 # Create a cursor
 cursor = conn.cursor()
 
-
-def create_db():
+# creates the skeleton structure of the databases, without the actual data.
+# only columns names are created here, so later the actual data can be added to this db.
+def create_db_structure():
     # deletes previous existing tables
     # TODO: at the end, reconsider this drop, because we dont want to reload the whole db everytime...
     cursor.execute('''DROP TABLE metadata''')
@@ -69,14 +70,15 @@ def append_contig(contig_df):
 
 
 if __name__ == '__main__':
-    create_db()
-    handle_metadata.create_metadata_db(conn)
-    # # a test to check that metadata table was created properly
-    # metadata_df_from_db = pd.read_sql_query("SELECT * from metadata", conn)
-    # print(metadata_df_from_db)
+    create_db_structure()
+    handle_metadata.fill_metadata_db(conn)
+    # START TEST- a test to check that metadata table was created properly
+    metadata_df_from_db = pd.read_sql_query("SELECT * from metadata", conn)
+    print(metadata_df_from_db)
+    # END TEST
 
-    contig_df = handle_contig.create_contig_df()
-    append_contig(contig_df)
+    # contig_df = handle_contig.create_contig_df()
+    # append_contig(contig_df)
 
     # contig_df_from_db = pd.read_sql_query("SELECT * from experiment_data", conn)
     # print(contig_df_from_db)
@@ -84,7 +86,7 @@ if __name__ == '__main__':
                                 "WHERE metadata.series_number = experiment_data.series_number AND metadata.sample_number = experiment_data.sample_number",
                                 conn)
     # Commit the transaction
-    print(test_df)
+    # print(test_df)
     conn.commit()
     # Close the connection
     conn.close()
