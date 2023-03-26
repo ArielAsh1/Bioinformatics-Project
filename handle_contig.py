@@ -24,6 +24,7 @@ def append_contig(contig_df):
 def load_contig_files(parent_directory):
     files_counter = 0
     # Loop through each folder in the parent directory
+    failed_files = []
     for folder in os.listdir(parent_dir):
         folder_path = os.path.join(parent_dir, folder)
         # I assume folder name is the METADATA serial number.
@@ -36,20 +37,21 @@ def load_contig_files(parent_directory):
             csv_files = [os.path.join(folder_path, file) for file in os.listdir(folder_path) if
                          file.endswith('.csv') and 'contig' in file]
             # Loop through each CSV file and load it into a Pandas dataframe
-            df_list = [] # only for testing
             for file in csv_files:
-                print (f"working on {file}, from {folder_name}")
-                contig_df = create_contig_df(file, folder_name)
-                df_list.append(contig_df)
-                files_counter += 1
-                # TODO: insert df to database. main.append_contig(contig_df)
                 try:
+                    print(f"working on {file}, from {folder_name}")
+                    contig_df = create_contig_df(file, folder_name)
+                    files_counter += 1
                     append_contig(contig_df)
                     print(f"succesfully inserted {file} to db")
                 except Exception as e:
+                    failed_files.append(file)
                     print(f"Failed to insert data from {file}: {e}")
 
     print(f"worked on total of {files_counter} contig files")
+    if failed_files:
+        print("Failed to insert data from: " + " | ".join(list(map(lambda x: str(x), failed_files))))
+        # print(f"failed working on files: {failed_files}")
 
 
 def check_column(df_columns):
@@ -110,9 +112,8 @@ if __name__ == '__main__':
     todel = input("delete?\n")
     if todel == 'y':
         cursor.execute("DELETE FROM experiment_Data")
-    else:
-        parent_dir = '..'
-        load_contig_files(parent_dir)
+    parent_dir = '.'
+    load_contig_files(parent_dir)
     # Commit the transaction
     conn.commit()
     # Close the connection

@@ -12,8 +12,8 @@ cursor = conn.cursor()
 def create_db_structure():
     # deletes previous existing tables
     # TODO: at the end, reconsider this drop, because we dont want to reload the whole db everytime...
-    cursor.execute('''DROP TABLE metadata''')
-    cursor.execute('''DROP TABLE experiment_Data''')
+    # cursor.execute('''DROP TABLE metadata''')
+    # cursor.execute('''DROP TABLE experiment_Data''')
 
     # Create the metadata table
     cursor.execute('''CREATE TABLE metadata (series_number TEXT NOT NULL,
@@ -75,7 +75,7 @@ def append_contig(contig_df):
 
 
 if __name__ == '__main__':
-    # create_db_structure()
+    create_db_structure()
     # handle_metadata.fill_metadata_db(conn)
     # TODO: remove it afterwords: command deletes all data from table
     # cursor.execute("DELETE FROM experiment_Data")
