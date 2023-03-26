@@ -1,8 +1,5 @@
-import os
 import sqlite3
-import pandas as pd
-import handle_contig
-import handle_metadata
+
 
 # Connect to the database
 conn = sqlite3.connect('new_database.db')
@@ -66,27 +63,23 @@ def create_db_structure():
 
 
 def append_contig(contig_df):
-    contig_df.to_sql("experiment_Data", conn, if_exists="append", index=False)
+    # TODO: add try and catch
+    try:
+        contig_df.to_sql("experiment_Data", conn, if_exists="append", index=False)
+        # Commit the changes to the database
+        # conn.commit()
+
+    except Exception as e:
+        print("Error occurred while inserting data: ", e)
+        raise e
 
 
 if __name__ == '__main__':
-    create_db_structure()
-    handle_metadata.fill_metadata_db(conn)
-    # START TEST- a test to check that metadata table was created properly
-    metadata_df_from_db = pd.read_sql_query("SELECT * from metadata", conn)
-    print(metadata_df_from_db)
-    # END TEST
-
-    # contig_df = handle_contig.create_contig_df()
-    # append_contig(contig_df)
-
-    # contig_df_from_db = pd.read_sql_query("SELECT * from experiment_data", conn)
-    # print(contig_df_from_db)
-    test_df = pd.read_sql_query("SELECT age FROM metadata WHERE sample_number "
-                                "IN (SELECT DISTINCT sample_number FROM experiment_data)",
-                                conn)
+    # create_db_structure()
+    # handle_metadata.fill_metadata_db(conn)
+    # TODO: remove it afterwords: command deletes all data from table
+    # cursor.execute("DELETE FROM experiment_Data")
     # Commit the transaction
-    # print(test_df)
     conn.commit()
     # Close the connection
     conn.close()
