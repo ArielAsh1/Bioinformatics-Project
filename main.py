@@ -1,5 +1,6 @@
 import sqlite3
-
+import handle_contig
+import handle_metadata
 
 # Connect to the database
 conn = sqlite3.connect('new_database.db')
@@ -12,8 +13,8 @@ cursor = conn.cursor()
 def create_db_structure():
     # deletes previous existing tables
     # TODO: at the end, reconsider this drop, because we dont want to reload the whole db everytime...
-    # cursor.execute('''DROP TABLE metadata''')
-    # cursor.execute('''DROP TABLE experiment_Data''')
+    cursor.execute('''DROP TABLE metadata''')
+    cursor.execute('''DROP TABLE experiment_Data''')
 
     # Create the metadata table
     cursor.execute('''CREATE TABLE metadata (series_number TEXT NOT NULL,
@@ -27,6 +28,7 @@ def create_db_structure():
       cell_type TEXT,
       smokers TEXT,
       notes TEXT,
+      patient_id_unique TEXT,
       primary key (series_number, sample_number));
     ''')
 
@@ -52,6 +54,7 @@ def create_db_structure():
       umis INTEGER CHECK (umis > 0),
       raw_clonotype_id TEXT,
       raw_consensus_id TEXT,
+      barcode_unique TEXT,
       primary key (record_id, series_number, sample_number)
       FOREIGN KEY(series_number) REFERENCES metadata(series_number) 
       ON DELETE CASCADE
@@ -75,10 +78,15 @@ def append_contig(contig_df):
 
 
 if __name__ == '__main__':
-    create_db_structure()
-    # handle_metadata.fill_metadata_db(conn)
-    # TODO: remove it afterwords: command deletes all data from table
-    # cursor.execute("DELETE FROM experiment_Data")
+    cursor.execute('''DROP TABLE table1''')
+    # create_db_structure()
+    # todel = input("delete?\n")
+    # if todel == 'y':
+    #     cursor.execute("DELETE FROM metadata")
+    #     cursor.execute("DELETE FROM experiment_Data")
+    # parent_dir = '.'
+    # handle_metadata.load_metaData_files(parent_dir, conn)
+    # handle_contig.load_contig_files(parent_dir, conn)
     # Commit the transaction
     conn.commit()
     # Close the connection
