@@ -105,9 +105,20 @@ def adjust_contig(csv_file, metadata_number):
     contig_table['barcode_unique'] = contig_table.apply(create_unique_barcode, axis=1)
     return contig_table
 
+import sqlite3
+
+# Connect to the database
+conn = sqlite3.connect('new_database.db')
+
+# Create a cursor
+cursor = conn.cursor()
 
 if __name__ == '__main__':
-    pass
+    dir = "GSE114724/GSM3148584_BC11_TUMOR2_filtered_contig_annotations.csv"
+    contig_df = adjust_contig("GSE114724/GSM3148584_BC11_TUMOR2_filtered_contig_annotations.csv", "GSE114724")
+    add_contig_todb(contig_df, conn)
+    conn.commit()
+    conn.close()
 
 
 
