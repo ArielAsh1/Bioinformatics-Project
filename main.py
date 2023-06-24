@@ -1,4 +1,5 @@
 import sqlite3
+import re
 import handle_contig
 import handle_metadata
 
@@ -78,16 +79,92 @@ def append_contig(contig_df):
 
 
 if __name__ == '__main__':
-    cursor.execute('''DROP TABLE table1''')
-    # create_db_structure()
-    # todel = input("delete?\n")
-    # if todel == 'y':
-    #     cursor.execute("DELETE FROM metadata")
-    #     cursor.execute("DELETE FROM experiment_Data")
-    # parent_dir = '.'
-    # handle_metadata.load_metaData_files(parent_dir, conn)
-    # handle_contig.load_contig_files(parent_dir, conn)
-    # Commit the transaction
-    conn.commit()
+    # Get the count of lymph node samples
+    cursor.execute("""
+        SELECT COUNT(DISTINCT sample_number)
+        FROM metadata
+        WHERE LOWER(tissue) LIKE '%lymph node%'
+    """)
+    lymph_node_count = cursor.fetchone()[0]
+
+    # Get the count of tumor samples
+    cursor.execute("""
+        SELECT COUNT(DISTINCT sample_number)
+        FROM metadata
+        WHERE LOWER(tissue) LIKE '%tumor%'
+    """)
+    tumor_count = cursor.fetchone()[0]
+
+    # Get the v_genes and their percentages in lymph node samples
+    cursor.execute("""
+        SELECT v_gene, (COUNT(*) * 100.0 / ?) AS percentage
+        FROM experiment_Data
+        WHERE sample_number IN (
+            SELECT sample_number
+            FROM metadata
+            WHERE LOWER(tissue) LIKE '%lymph node%'
+        )
+        GROUP BY v_gene
+    """, (lymph_node_count,))  # Pass lymph_node_count as a parameter
+
+    lymph_node_results = cursor.fetchall()
+
+    # Get the v_genes and their percentages in tumor samples
+    cursor.execute("""
+        SELECT v_gene, (COUNT(*) * 100.0 / ?) AS percentage
+        FROM experiment_Data
+        WHERE sample_number IN (
+            SELECT sample_number
+            FROM metadata
+            WHERE LOWER(tissue) LIKE '%tumor%'
+        )
+        GROUP BY v_gene
+    """, (tumor_count,))  # Pass tumor_count as a parameter
+
+    tumor_results = cursor.fetchall()
+
+    # Create sets of v_genes for lymph node and tumor samples
+    lymph_node_genes = set(result[0] for result in lymph_node_results)
+    tumor_genes = set(result[0] for result in tumor_results)
+
+    # Find the common v_genes in both lymph node and tumor samples
+    common_genes = lymph_node_genes.intersection(tumor_genes)
+
+    # Find the unique v_genes in lymph node and tumor samples
+    unique_lymph_node_genes = lymph_node_genes - common_genes
+    unique_tumor_genes = tumor_genes - common_genes
+
+    # Compare the v_gene variety based on the common genes
+    lymph_node_variety = len(common_genes)
+    tumor_variety = len(common_genes)
+
+    if lymph_node_variety > tumor_variety:
+        print("There is a greater variety of common v_genes in lymph node samples compared to tumor samples.")
+    elif lymph_node_variety < tumor_variety:
+        print("There is a greater variety of common v_genes in tumor samples compared to lymph node samples.")
+    else:
+        print("The variety of common v_genes is the same between lymph node and tumor samples.")
+
+    # Compare the v_gene percentages for each common gene
+    for gene in common_genes:
+        lymph_node_percentage = next(result[1] for result in lymph_node_results if result[0] == gene)
+        tumor_percentage = next(result[1] for result in tumor_results if result[0] == gene)
+
+        if lymph_node_percentage > tumor_percentage:
+            print(f"The v_gene {gene} has a higher percentage in lymph node samples.")
+        elif lymph_node_percentage < tumor_percentage:
+            print(f"The v_gene {gene} has a higher percentage in tumor samples.")
+        else:
+            print(f"The v_gene {gene} has the same percentage in lymph node and tumor samples.")
+
+    # Print the unique v_genes in lymph node samples
+    print("Unique v_genes in lymph node samples:")
+    for gene in unique_lymph_node_genes:
+        print(gene)
+
+    # Print the unique v_genes in tumor samples
+    print("Unique v_genes in tumor samples:")
+    for gene, percent in unique_tumor_genes:
+        print(gene)
     # Close the connection
     conn.close()
