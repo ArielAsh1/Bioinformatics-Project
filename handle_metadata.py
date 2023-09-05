@@ -47,7 +47,6 @@ def fill_metadata_db(conn):
     # # add the current dataframe to the metadata database
     # add_data(metadata_df, conn)
 
-
     for metadata_file in os.listdir('metadatas_csv_from_mobax'):
         if metadata_file.endswith('.csv'):
             # Read the CSV file into a DataFrame
@@ -60,8 +59,6 @@ def fill_metadata_db(conn):
             add_data(metadata_df, conn)
 
 
-# TODO? add an option to directly add adjusted new files that aren't stored in the metadata dir (for future usage)
-#
 def add_data(metadata_df, conn):
     """ adding the current dataframe to the metadata database. """
     # Insert the data into the metadata database
@@ -85,13 +82,9 @@ def adjust_data(metadata_df):
     metadata_df['patient_id_unique'] = metadata_df.apply(create_unique_patientid, axis=1)
 
 
-# TODO? should allow removing data from metadata table
+# optional
 def remove_data():
     pass
 
-
-# should allow changing data from metadata table - rethink about this one if it's really needed
-def change_data():
-    pass
 
 

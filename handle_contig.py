@@ -3,9 +3,7 @@ import pandas as pd
 import hashlib
 
 
-
 def add_contig_todb(contig_df, conn):
-    # TODO: add try and catch
     try:
         contig_df.to_sql("experiment_Data", conn, if_exists="append", index=False)
         # Commit the changes to the database
@@ -25,8 +23,7 @@ def load_contig_files(parent_directory, conn):
         # I assume folder name is the METADATA serial number.
         folder_name = os.path.basename(folder_path)
         # Check if the item in the parent directory is a folder
-        # TODO: currently, all relevant folder start with GSE (code for metadata). should consider the possibility of
-        #  different name for the folder!
+        # TODO: currently, all relevant folder start with GSE (code for metadata).
         if os.path.isdir(folder_path):
             # Get a list of all the contig.csv files in the folder
             csv_files = [os.path.join(folder_path, file) for file in os.listdir(folder_path) if
@@ -87,7 +84,6 @@ def adjust_contig(csv_file, metadata_number):
         # missing column will be deleted.
         print(f"NOTICE: {filename} contains illegal columns: {missing_columns}.")
     sample_number = filename[:filename.index("_")]
-    # TODO: load_contig_files function should also send the metadata name.
     series_number = metadata_number
     # inserts sample and series value to start of df
     contig_table.insert(0, "sample_number", sample_number, True)
