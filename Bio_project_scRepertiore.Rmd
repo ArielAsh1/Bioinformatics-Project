@@ -1,0 +1,601 @@
+---
+title: "new_try"
+output: html_document
+date: "2023-06-25"
+---
+https://ncborcherding.github.io/vignettes/vignette.html#43_Length_of_Clonotypes
+https://bioconductor.org/packages/devel/bioc/manuals/scRepertoire/man/scRepertoire.pdf
+https://support.10xgenomics.com/single-cell-vdj/software/pipelines/latest/output/annotation#contig
+
+
+### DATA PREPERATION
+
+```{r}
+suppressMessages(library(scRepertoire))
+suppressMessages(library(Seurat))
+suppressMessages(library(ggplot2))
+```
+
+```{r}
+p34_1 <- read.csv("Data/Patient34/lymph/GSM5456914_HPV34_QVD_metLN_all_contig_annotations.csv")
+p34_2 <- read.csv("Data/Patient34/lymph/GSM5456916_HPV34_KSA_metLN_all_contig_annotations.csv")
+p34_3 <- read.csv("Data/Patient34/lymph/GSM5456920_HPV34_PD1pos_metLN_all_contig_annotations.csv")
+
+p51_1 <- read.csv("Data/Patient51/lymph/GSM5456926_HPV51_QVD_metLN_all_contig_annotations.csv")
+p51_2 <- read.csv("Data/Patient51/lymph/GSM5456930_HPV51_PD1pos_metLN_all_contig_annotations.csv")
+
+p7_1 <- read.csv("Data/Patient7/lymph/GSM5456934_HPV7_QVD_metLN_all_contig_annotations.csv")
+p7_2 <- read.csv("Data/Patient7/lymph/GSM5456936_HPV7_KSA_metLN_all_contig_annotations.csv")
+p7_3 <- read.csv("Data/Patient7/lymph/GSM5456940_HPV7_PD1pos_metLN_all_contig_annotations.csv")
+
+
+contig_list_l <- list(p34_1, p34_2, p34_3, p51_1, p51_2, p7_1, p7_2, p7_3)
+
+```
+
+```{r}
+sample_names <- c("p34_1_ln", "p34_2_ln", "p34_3_ln", "p51_1_ln", "p51_2_ln", "p7_1_ln", "p7_2_ln", "p7_3_ln")
+# removeNA This will remove any chain without values.
+# removeMulti This will remove barcodes with greater than 2 chains.
+combined_lymph <- combineTCR(contig_list_l, samples = sample_names, removeNA = T, removeMulti = T)
+
+```
+
+### DATA ANALASYS
+
+```{r}
+# quantContig(): to return the total or relative numbers of unique clonotypes.
+
+# Scale = T: relative percent of unique clonotypes scaled by the total size of the clonotype repertoire
+# it seems that chain = "both" by default 
+quantContig(combined_lymph, cloneCall = "gene+nt", scale = T)
+quantContig(combined_lymph, cloneCall = "gene+nt", scale = T, chain = "TRA")
+quantContig(combined_lymph, cloneCall = "gene+nt", scale = T, chain = "TRB")
+quantContig(combined_lymph, cloneCall = "aa", scale = T)
+
+
+```
+
+```{r}
+# We can also examine the relative distribution of clonotypes by abundance
+abundanceContig(combined_lymph, cloneCall = "gene", scale = FALSE)
+abundanceContig_output <-abundanceContig(combined_lymph, cloneCall = "gene", scale = FALSE, exportTable = T)
+abundanceContig_output
+```
+
+```{r}
+# We can look at the length distribution of the CDR3 sequences by calling the lengtheContig() function. 
+lengthContig(combined_lymph, cloneCall="aa", chain = "both") 
+# For TRA chain
+# Create the plot for combined_tumor with chain = "TRA"
+plot_tra <- lengthContig(combined_lymph, cloneCall = "aa", chain = "TRA")
+
+# Create the plot for combined_tumor with chain = "TRB"
+plot_trb <- lengthContig(combined_lymph, cloneCall = "aa", chain = "TRB")
+
+# Add title using the theme() function
+plot_tra_with_title <- plot_tra + 
+  labs(title = "Length Distribution of TRA Clonotypes in Lymph Node tissue") +
+  theme(plot.title = element_text(size = 14, face = "bold"))
+
+plot_trb_with_title <- plot_trb + 
+  labs(title = "Length Distribution of TRB Clonotypes in Lymph Node tissue") +
+  theme(plot.title = element_text(size = 14, face = "bold"))
+
+# Display the plots
+print(plot_tra_with_title)
+print(plot_trb_with_title)
+```
+In this grpah, we can see that in the "small" samples, with less percent of unique clonetypes, 10 clonotypes hold most of the clonotypes in the samples, but in the "big" samples, they hold about 25%.
+```{r}
+
+# Create the first plot
+plot1 <- compareClonotypes(combined_lymph, 
+                           numbers = 10, 
+                           cloneCall = "aa", 
+                           graph = "alluvial", 
+                           samples = c("p34_3_ln", "p51_2_ln", "p7_3_ln"))
+
+# Modify appearance of the first plot
+plot1 <- plot1 + theme(legend.text=element_text(size=8),   # Adjust legend text size
+                       axis.text=element_text(size=12))     # Adjust axis text size
+
+# Create the second plot
+plot2 <- compareClonotypes(combined_lymph, 
+                           numbers = 10, 
+                           cloneCall = "aa", 
+                           graph = "alluvial", 
+                           samples = c("p34_1_ln", "p34_2_ln", "p51_1_ln", "p7_1_ln", "p7_2_ln"))
+
+# Modify appearance of the second plot
+plot2 <- plot2 + theme(legend.text=element_text(size=7),   # Adjust legend text size
+                       axis.text=element_text(size=11))     # Adjust axis text size
+
+# Display the plots
+print(plot1)
+print(plot2)
+
+```
+We can see that a few V genes are dominante in diferent samples.
+
+```{r}
+
+# Assuming you have already created the 'combined' object using combineTCR
+
+# Create the plot using vizGenes
+plot <- vizGenes(combined_lymph, 
+                 gene = "V", 
+                 chain = "TRA", 
+                 plot = "bar", 
+                 order = "variance", 
+                 scale = TRUE)
+
+# Use theme() to modify the appearance of the plot
+plot + labs(title = "Relative usage of genes of the TCR in TRA chain from Lymph Node Tissue") +
+  theme(axis.text.x = element_text(size = 13))  # Adjust the 'size' parameter as needed
+
+# Create the plot using vizGenes
+plot2 <- vizGenes(combined_lymph, 
+                 gene = "V", 
+                 chain = "TRB", 
+                 plot = "bar", 
+                 order = "variance", 
+                 scale = TRUE)
+
+# Use theme() to modify the appearance of the plot
+plot2 + labs(title = "Relative usage of genes of the TCR in TRB chain from Lymph Node Tissue") +
+  theme(axis.text.x = element_text(size = 13))  # Adjust the 'size' parameter as needed
+
+```
+
+### TUMOR ANALASYS
+
+```{r}
+p34_1_t <- read.csv("Data/Patient34/tumor/GSM5456912_HPV34_QVD_Tumor_all_contig_annotations.csv")
+p34_2_t <- read.csv("Data/Patient34/tumor/GSM5456918_HPV34_PD1pos_Tumor_all_contig_annotations.csv")
+
+p51_1_t <- read.csv("Data/Patient51/tumor/GSM5456922_HPV51_QVD_Tumor_all_contig_annotations.csv")
+p51_2_t <- read.csv("Data/Patient51/tumor/GSM5456924_HPV51_KSA_Tumor_all_contig_annotations.csv")
+p51_3_t <- read.csv("Data/Patient51/tumor/GSM5456928_HPV51_PD1pos_Tumor_all_contig_annotations.csv")
+
+p7_1_t <- read.csv("Data/Patient7/tumor/GSM5456932_HPV7_KSA_Tumor_all_contig_annotations.csv")
+p7_2_t <- read.csv("Data/Patient7/tumor/GSM5456938_HPV7_PD1pos_Tumor_all_contig_annotations.csv")
+
+contig_list_t <- list(p34_1_t, p34_2_t, p51_1_t, p51_2_t, p51_3_t, p7_1_t, p7_2_t)
+```
+
+
+```{r}
+sample_names_t <- c("p34_1_t", "p34_2_t", "p51_1_t", "p51_2_t", "p51_3_t", "p7_1_t", "p7_2_t")
+# removeNA This will remove any chain without values.
+# removeMulti This will remove barcodes with greater than 2 chains.
+combined_tumor <- combineTCR(contig_list_t, samples = sample_names_t, removeNA = T, removeMulti = T)
+```
+
+
+```{r}
+quantContig(combined_tumor, cloneCall = "gene+nt", scale = T)
+quantContig(combined_tumor, cloneCall = "aa", scale = T)
+
+```
+
+```{r}
+  abundanceContig(combined_tumor, cloneCall = "gene", scale = FALSE)
+lengthContig(combined_tumor, cloneCall="aa", chain = "both")
+# For TRA chain
+# Create the plot for combined_tumor with chain = "TRA"
+plot_tra <- lengthContig(combined_tumor, cloneCall = "aa", chain = "TRA")
+
+# Create the plot for combined_tumor with chain = "TRB"
+plot_trb <- lengthContig(combined_tumor, cloneCall = "aa", chain = "TRB")
+
+# Add title using the theme() function
+plot_tra_with_title <- plot_tra + 
+  labs(title = "Length Distribution of TRA Clonotypes in Tumor Tissue") +
+  theme(plot.title = element_text(size = 14, face = "bold"))
+
+plot_trb_with_title <- plot_trb + 
+  labs(title = "Length Distribution of TRB Clonotypes in Tumor Tissue") +
+  theme(plot.title = element_text(size = 14, face = "bold"))
+
+# Display the plots
+print(plot_tra_with_title)
+print(plot_trb_with_title)
+
+```
+Here, we can also spot a few dominant genes.
+
+```{r}
+library(ggplot2)
+
+# Assuming you have already created the 'combined' object using combineTCR
+
+# Create the plot using vizGenes
+plot <- vizGenes(combined_tumor, 
+                 gene = "V", 
+                 chain = "TRA", 
+                 plot = "bar", 
+                 order = "variance", 
+                 scale = TRUE)
+
+# Use theme() to modify the appearance of the plot
+plot + labs(title = "Relative usage of genes of the TCR in TRA chain from Tumor Tissue") + 
+  theme(axis.text.x = element_text(size = 12))  # Adjust the 'size' parameter as needed
+
+plot2 <- vizGenes(combined_tumor, 
+                 gene = "V", 
+                 chain = "TRB", 
+                 plot = "bar", 
+                 order = "variance", 
+                 scale = TRUE)
+
+# Use theme() to modify the appearance of the plot
+plot2 + labs(title = "Relative usage of genes of the TCR in TRB chain from Tumor Tissue") + 
+  theme(axis.text.x = element_text(size = 12))  # Adjust the 'size' parameter as needed
+```
+
+```{r}
+library(ggplot2)
+
+# Create the plot for combined_lymph
+plot_lymph <- vizGenes(combined_lymph, 
+                       gene = "V", 
+                       chain = "TRA", 
+                       y.axis = "J", 
+                       plot = "heatmap", 
+                       scale = TRUE, 
+                       order = "gene")
+
+# Create the plot for combined_tumor
+plot_tumor <- vizGenes(combined_tumor, 
+                       gene = "V", 
+                       chain = "TRA", 
+                       y.axis = "J", 
+                       plot = "heatmap", 
+                       scale = TRUE, 
+                       order = "gene")
+
+# Use theme() to modify the appearance of the plots
+plot_lymph + theme(axis.text.x = element_text(size = 12),   # Adjust x-axis labels size
+                   axis.text.y = element_text(size = 12))   # Adjust y-axis labels size
+
+plot_tumor + theme(axis.text.x = element_text(size = 12),   # Adjust x-axis labels size
+                   axis.text.y = element_text(size = 12))   # Adjust y-axis labels size
+
+```
+
+```{r}
+# Create the plot for combined_lymph
+plot_lymph2 <- vizGenes(combined_lymph, 
+                       gene = "V", 
+                       chain = "TRB", 
+                       y.axis = "J", 
+                       plot = "heatmap", 
+                       scale = TRUE, 
+                       order = "gene")
+
+# Create the plot for combined_tumor
+plot_tumor2 <- vizGenes(combined_tumor, 
+                       gene = "V", 
+                       chain = "TRB", 
+                       y.axis = "J", 
+                       plot = "heatmap", 
+                       scale = TRUE, 
+                       order = "gene")
+
+# Use theme() to modify the appearance of the plots
+plot_lymph2 + theme(axis.text.x = element_text(size = 12),   # Adjust x-axis labels size
+                   axis.text.y = element_text(size = 12))   # Adjust y-axis labels size
+
+plot_tumor2 + theme(axis.text.x = element_text(size = 12),   # Adjust x-axis labels size
+                   axis.text.y = element_text(size = 12))   # Adjust y-axis labels size
+```
+
+### Advanced Clonal Analysis
+
+By examining the clonal space, we are effectively looking at the relative space occupied by clones at specific proportions.
+Another way to think about this would be thinking of the total immune receptor sequencing run as a measuring cup. In this cup, we will fill liquids of different viscosity - or a different number of clonal proportions.
+Clonal space homeostasis asks what percentage of the cup is filled by clones in distinct proportions (or liquids of different viscosity, to extend the analogy).
+
+```{r}
+clonalHomeostasis(combined_lymph, cloneCall = "gene")
+clonalHomeostasis(combined_tumor, cloneCall = "gene")
+```
+
+```{r}
+clonalOverlap(combined_lymph, cloneCall = "nt", method = "raw")
+```
+
+```{r}
+p34_comb_lymph <- rbind(p34_1, p34_2, p34_3)
+p51_comb_lymph <- rbind(p51_1, p51_2)
+p7_comb_lymph <- rbind(p7_1, p7_2, p7_3)
+
+p34_comb_tumor <- rbind(p34_1_t, p34_2_t)
+p51_comb_tumor <- rbind(p51_1_t, p51_2_t, p51_3_t)
+p7_comb_tumor <- rbind(p7_1_t, p7_2_t)
+
+contig_list_comb <- list(p34_comb_lymph, p51_comb_lymph, p7_comb_lymph, p34_comb_tumor, p51_comb_tumor, p7_comb_tumor)
+sample_names_both <- c("p34_lymph", "p51_lymph", "p7_lymph", "p34_tumor", "p51_tumor", "p7_tumor")
+
+combined_both <- combineTCR(contig_list_comb, samples = sample_names_both, removeNA = T, removeMulti = T)
+
+```
+
+If you are interested in measures of similarity between the samples loaded into scRepertoire, using clonalOverlap() can assist in the visualization.
+Three methods currently can be performed in clonalOverlap() 1) overlap coefficient, 2) Morisita index, or 3) Jaccard index.
+The former is looking at the overlap of clonotypes scaled to the length of unique clonotypes in the smaller sample.
+The Morisita index is more complex, it is an ecological measure of the dispersion of individuals within a population, incorporating the size of the population.
+The Jaccard Similarity Index is very similar to the overlap coefficient - instead of using the length of the smaller sample, the denominator for the Jaccard Index is the union of the two comparisons, leading to a much smaller number.
+
+### Combined DF
+
+```{r}
+quantContig(combined_both, cloneCall = "aa", scale = T)
+plot <- abundanceContig(combined_both, cloneCall = "gene", scale = F)
+# Use theme() to modify the appearance of the plot
+plot + labs(title = "relative abundance of clonotypes by sample") + 
+  theme(axis.text.x = element_text(size = 12))  # Adjust the 'size' parameter as needed
+
+plot2 <- lengthContig(combined_both[c(1,2,3)], cloneCall="aa", chain = "both", scale = TRUE)
+# Use theme() to modify the appearance of the plot
+plot2 + labs(title = "distribution of lengths filtered contigs from Lymph Node Tissue") + 
+  theme(axis.text.x = element_text(size = 12))  # Adjust the 'size' parameter as needed
+
+plot3 <- lengthContig(combined_both[c(4,5,6)], cloneCall="aa", chain = "both", scale = TRUE)
+# Use theme() to modify the appearance of the plot
+plot3 + labs(title = "distribution of lengths filtered contigs from Tumor Tissue") + 
+  theme(axis.text.x = element_text(size = 12))  # Adjust the 'size' parameter as needed
+```
+```{r}
+vizGenes(combined_both, 
+                 gene = "V", 
+                 chain = "TRA", 
+                 plot = "bar", 
+                 order = "variance", 
+                 scale = TRUE)
+
+vizGenes(combined_both, 
+                 gene = "V", 
+                 chain = "TRB", 
+                 plot = "bar", 
+                 order = "variance", 
+                 scale = TRUE)
+
+```
+
+```{r}
+plot1 <-vizGenes(combined_both[c(1,2,3)], 
+                       gene = "V", 
+                       chain = "TRA", 
+                       y.axis = "J", 
+                       plot = "heatmap", 
+                       scale = TRUE, 
+                       order = "gene")
+plot2 <-vizGenes(combined_both[c(4,5,6)], 
+                       gene = "V", 
+                       chain = "TRA", 
+                       y.axis = "J", 
+                       plot = "heatmap", 
+                       scale = TRUE, 
+                       order = "gene")
+
+plot3 <-vizGenes(combined_both[c(1,2,3)], 
+                       gene = "V", 
+                       chain = "TRB", 
+                       y.axis = "J", 
+                       plot = "heatmap", 
+                       scale = TRUE, 
+                       order = "gene")
+plot4 <- vizGenes(combined_both[c(4,5,6)], 
+                       gene = "V", 
+                       chain = "TRB", 
+                       y.axis = "J", 
+                       plot = "heatmap", 
+                       scale = TRUE, 
+                       order = "gene")
+
+```
+
+
+```{r}
+
+
+# Assuming plot1, plot2, plot3, and plot4 are the ggplot objects that you want to modify
+
+# Modify appearance of the first plot (plot1)
+plot1 <- plot1 + theme(axis.text.x = element_text(size = 10),
+                       axis.text.y = element_text(size = 8),
+                       plot.title = element_text(hjust = 0.5))  # Center the title
+
+# Add a title to the first plot (plot1) using labs()
+plot1 <- plot1 + labs(title = "Visualizing the distribution of TRA chain gene usage in Lymph Node Samples")
+
+# Print the modified first plot (plot1)
+print(plot1)
+
+# Modify appearance of the second plot (plot2)
+plot2 <- plot2 + theme(axis.text.x = element_text(size = 10),
+                       axis.text.y = element_text(size = 8),
+                       plot.title = element_text(hjust = 0.5))  # Center the title
+
+# Add a title to the second plot (plot2) using labs()
+plot2 <- plot2 + labs(title = "Visualizing the distribution of TRA chain gene usage in Tumor Samples")
+
+# Print the modified second plot (plot2)
+print(plot2)
+
+# Modify appearance of the third plot (plot3)
+plot3 <- plot3 + theme(axis.text.x = element_text(size = 11),
+                       axis.text.y = element_text(size = 12),
+                       plot.title = element_text(hjust = 0.5))  # Center the title
+
+# Add a title to the third plot (plot3) using labs()
+plot3 <- plot3 + labs(title = "Visualizing the distribution of TRB chain gene usage in Lymph Node Samples")
+
+# Print the modified third plot (plot3)
+print(plot3)
+
+# Modify appearance of the fourth plot (plot4)
+plot4 <- plot4 + theme(axis.text.x = element_text(size = 11),
+                       axis.text.y = element_text(size = 12),
+                       plot.title = element_text(hjust = 0.5))  # Center the title
+
+# Add a title to the fourth plot (plot4) using labs()
+plot4 <- plot4 + labs(title = "Visualizing the distribution of TRB chain gene usage in Tumor Samples")
+
+# Print the modified fourth plot (plot4)
+print(plot4)
+
+```
+
+
+```{r}
+# Create the first plot
+comclon1 <- compareClonotypes(combined_both, 
+                           numbers = 15, 
+                           cloneCall = "aa", 
+                           graph = "alluvial")
+
+# Modify appearance of the first plot
+comclon1 <- comclon1 + theme(legend.text=element_text(size=6),   # Adjust legend text size
+                       axis.text=element_text(size=10))     # Adjust axis text size
+print(comclon1)
+
+# Create the first plot
+comclon2 <- compareClonotypes(combined_both, 
+                           numbers = 15, 
+                           cloneCall = "gene", 
+                           graph = "alluvial")
+
+# Modify appearance of the first plot
+comclon2 <- comclon2 + theme(legend.text=element_text(size=6),   # Adjust legend text size
+                       axis.text=element_text(size=10))     # Adjust axis text size
+print(comclon2)
+
+```
+```{r}
+temp <- comclon1 + labs(title = "Difference in clonal proportion between clonotypes in AA") +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = "none")  # Hide the legend
+print(temp)
+
+temp2 <- comclon2 + labs(title = "Difference in clonal proportion between clonotypes in Genes") +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = "none")  # Hide the legend
+print(temp2)
+```
+
+
+```{r}
+
+clonalOverlap(combined_both, cloneCall = "genes", method = "morisita")
+clonalDiversity(combined_both, 
+                cloneCall = "gene", 
+                group.by = "sample", 
+                n.boots = 100)
+```
+
+```{r}
+# Step 1: Store the output of the compareClonotypes function
+clonotype_data <- compareClonotypes(combined_both,
+                           numbers = 15,
+                           cloneCall = "aa",
+                           graph = "alluvial",
+                           exportTable = TRUE)
+```
+
+```{r}
+# Assuming 'clonotype_data' contains the clonotype data from the 'compareClonotypes' function
+
+# Extract the clonotypes for the 'p34_lymph' and 'p34_tumor' samples
+clonotypes_lymph <- clonotype_data$Clonotype[clonotype_data$Sample == "p34_lymph"]
+clonotypes_tumor <- clonotype_data$Clonotype[clonotype_data$Sample == "p34_tumor"]
+# Find the unique clonotypes in 'p34_lymph' that are not present in 'p34_tumor'
+unique_clonotypes_lymph <- setdiff(clonotypes_lymph, clonotypes_tumor)
+
+# Find the unique clonotypes in 'p34_tumor' that are not present in 'p34_lymph'
+unique_clonotypes_tumor <- setdiff(clonotypes_tumor, clonotypes_lymph)
+
+# Print the unique clonotypes in 'p34_lymph' that are not present in 'p34_tumor'
+print("Unique clonotypes in 'p34_lymph' that are not present in 'p34_tumor':")
+print(unique_clonotypes_lymph)
+# Print the unique clonotypes in 'p34_tumor' that are not present in 'p34_lymph'
+print("Unique clonotypes in 'p34_tumor' that are not present in 'p34_lymph':")
+print(unique_clonotypes_tumor)
+
+
+clonotypes_p51_lymph <- clonotype_data$Clonotype[clonotype_data$Sample == "p51_lymph"]
+clonotypes_p51_tumor <- clonotype_data$Clonotype[clonotype_data$Sample == "p51_tumor"]
+unique_clonotypes_p51_lymph <- setdiff(clonotypes_p51_lymph, clonotypes_p51_tumor)
+unique_clonotypes_p51_tumor <- setdiff(clonotypes_p51_tumor, clonotypes_p51_lymph)
+print("Unique clonotypes in 'p51_lymph' that are not present in 'p51_tumor':")
+print(unique_clonotypes_p51_lymph)
+print("Unique clonotypes in 'p51_tumor' that are not present in 'p51_lymph':")
+print(unique_clonotypes_p51_tumor)
+
+clonotypes_p7_lymph <- clonotype_data$Clonotype[clonotype_data$Sample == "p7_lymph"]
+clonotypes_p7_tumor <- clonotype_data$Clonotype[clonotype_data$Sample == "p7_tumor"]
+unique_clonotypes_p7_lymph <- setdiff(clonotypes_p7_lymph, clonotypes_p7_tumor)
+unique_clonotypes_p7_tumor <- setdiff(clonotypes_p7_tumor, clonotypes_p7_lymph)
+print("Unique clonotypes in 'p7_lymph' that are not present in 'p7_tumor':")
+print(unique_clonotypes_p7_lymph)
+print("Unique clonotypes in 'p7_tumor' that are not present in 'p7_lymph':")
+print(unique_clonotypes_p7_tumor)
+
+
+
+```
+
+```{r}
+clonalHomeostasis(combined_both, cloneCall = "gene") # vdj
+clonalHomeostasis(combined_both, cloneCall = "aa") # cdr3
+clonalHomeostasis(combined_both, cloneCall = "strict") # both
+
+
+```
+
+```{r}
+# Load the ggplot2 package if not already loaded
+library(ggplot2)
+
+# Generate the first bar plot with a custom title and x-axis label size adjustment
+plot10 <- vizGenes(
+  combined_both,
+  gene = "V",
+  chain = "TRA",
+  plot = "bar",
+  order = "variance",
+  scale = TRUE
+) +
+  labs(title = "Relative usage of gene of the TCR in TRA chain") +
+  theme(axis.text.x = element_text(size = 12))  # Adjust the size (e.g., size = 12)
+
+# Generate the second bar plot with a custom title and x-axis label size adjustment
+plot11 <- vizGenes(
+  combined_both,
+  gene = "V",
+  chain = "TRB",
+  plot = "bar",
+  order = "variance",
+  scale = TRUE
+) +
+  labs(title = "Relative usage of gene of the TCR in TRB chain") +
+  theme(axis.text.x = element_text(size = 12))  # Adjust the size (e.g., size = 12)
+plot10
+plot11
+```
+
+
+```{r}
+library(dplyr)
+library(Seurat)
+library(patchwork)
+```
+
+```{r}
+s_p34_lymph <- CreateSeuratObject(counts = p34_comb_lymph, min.cells = 3, min.features = 200)
+
+```
+
+
